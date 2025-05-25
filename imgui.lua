@@ -70,9 +70,13 @@ local function isObstructed(eyePos, hitPos, ignoredEntity, ignoreParent)
 	q.endpos = hitPos
 	q.filter[1] = localPlayer
 	q.filter[2] = ignoredEntity
-	local parent = ignoredEntity:GetParent()
-	if IsValid(parent) and ignoreParent == true then
-		q.filter[3] = parent
+	if ignoreParent == true then
+		local parent = ignoredEntity:GetParent()
+		if IsValid(parent) then
+			q.filter[3] = parent
+		else
+			q.filter[3] = nil
+		end
 	end
 
 	local tr = util.TraceLine(q)
