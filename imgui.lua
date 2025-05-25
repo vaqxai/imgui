@@ -64,14 +64,14 @@ end)
 
 local traceResultTable = {}
 local traceQueryTable = { output = traceResultTable, filter = {} }
-local function isObstructed(eyePos, hitPos, ignoredEntity, filterParent)
+local function isObstructed(eyePos, hitPos, ignoredEntity, ignoreParent)
 	local q = traceQueryTable
 	q.start = eyePos
 	q.endpos = hitPos
 	q.filter[1] = localPlayer
 	q.filter[2] = ignoredEntity
 	local parent = ignoredEntity:GetParent()
-	if IsValid(parent) and filterParent == true then
+	if IsValid(parent) and ignoreParent == true then
 		q.filter[3] = parent
 	end
 
