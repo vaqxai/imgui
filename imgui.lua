@@ -77,6 +77,8 @@ local function isObstructed(eyePos, hitPos, ignoredEntity, ignoreParent)
 		else
 			q.filter[3] = nil
 		end
+	else
+		q.filter[3] = nil
 	end
 
 	local tr = util.TraceLine(q)
