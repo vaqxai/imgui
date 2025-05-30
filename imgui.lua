@@ -64,12 +64,22 @@ end)
 
 local traceResultTable = {}
 local traceQueryTable = { output = traceResultTable, filter = {} }
-local function isObstructed(eyePos, hitPos, ignoredEntity)
+local function isObstructed(eyePos, hitPos, ignoredEntity, ignoreParent)
 	local q = traceQueryTable
 	q.start = eyePos
 	q.endpos = hitPos
 	q.filter[1] = localPlayer
 	q.filter[2] = ignoredEntity
+	if ignoreParent == true then
+		local parent = ignoredEntity:GetParent()
+		if IsValid(parent) then
+			q.filter[3] = parent
+		else
+			q.filter[3] = nil
+		end
+	else
+		q.filter[3] = nil
+	end
 
 	local tr = util.TraceLine(q)
 	if tr.Hit then
@@ -157,7 +167,7 @@ function imgui.Start3D2D(pos, angles, scale, distanceHide, distanceFadeStart)
 
 		local hitPos = util.IntersectRayWithPlane(eyepos, eyenormal, pos, planeNormal)
 		if hitPos then
-			local obstructed, obstructer = isObstructed(eyepos, hitPos, gState.entity)
+			local obstructed, obstructer = isObstructed(eyepos, hitPos, gState.entity, true)
 			if obstructed then
 				gState.mx = nil
 				gState.my = nil
