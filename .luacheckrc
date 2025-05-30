@@ -28,6 +28,8 @@ std = {
         "tonumber",
         "vector_origin",
         "angle_zero",
+        "ScrW",
+        "ScrH",
     }
 }
 ignore = {"611"}
