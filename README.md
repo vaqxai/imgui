@@ -96,6 +96,12 @@ Start 3D2D context on an entity. Equivalent to `imgui.Start3D2D`, except a) `pos
 imgui.Entity3D2D(ent, lpos, lang, scale, distanceHide, distanceFadeStart)
 ```
 
+Start 3D2D context on a weapon. Intended for use with weapon viewmodels. Automatically corrects for FOV differences between the player and viewmodel. Unlike `imgui.Entity3D2D`, this does **not** transform local coordinates to world coordinates, as it is assumed you are working with bone positions (which are already in world-space).
+
+```lua
+imgui.Weapon3D2D(swep, pos, ang, scale, distanceHide, distanceFadeStart)
+```
+
 Ends 3D2D Context
 ```lua
 imgui.End3D2D()
